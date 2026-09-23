@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="أدواتي المجانية: أدوات عربية للحساب والتحويل وكتابة النصوص، مع فرص تطوع في أوروبا من مصادر رسمية.">
+<meta name="theme-color" content="#111827">
+<title>أدواتي المجانية</title>
+<style>
+:root{--n:#111827;--b:#2563eb;--s:#eef2ff;--g:#f6f8fc;--t:#172033;--m:#64748b;--w:#fff;--e:#e5e7eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--g);color:var(--t);font-family:system-ui,Tahoma,Arial,sans-serif;line-height:1.7}
+header{background:linear-gradient(135deg,#111827,#1e3a8a);color:white;text-align:center;padding:38px 16px}header h1{margin:0;font-size:clamp(32px,8vw,52px)}header p{margin:8px auto;color:#dbeafe;font-size:18px}
+nav{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--e);padding:10px;display:flex;gap:8px;overflow:auto;justify-content:center}
+nav button{white-space:nowrap;border:0;background:var(--s);color:#1e3a8a;padding:10px 15px;border-radius:999px;font-weight:700}
+main{max-width:1050px;margin:auto;padding:22px 14px 50px}.card{background:#fff;border:1px solid var(--e);border-radius:22px;padding:22px;margin:16px 0;box-shadow:0 8px 30px #0f172a0d}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.tool{border:1px solid var(--e);border-radius:18px;padding:18px}
+h2{margin-top:0}label{display:block;font-weight:700;margin:9px 0 5px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;font:inherit;background:#fff}textarea{min-height:170px}
+.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--b);color:#fff;font-weight:800;margin-top:10px}.result{margin-top:12px;padding:12px;border-radius:12px;background:#f1f5f9;min-height:45px;font-weight:700}
+.notice{background:#eff6ff;border-right:4px solid var(--b);padding:12px 14px;border-radius:12px}.small{color:var(--m);font-size:14px}.hidden{display:none}
+footer{background:#0f172a;color:#cbd5e1;text-align:center;padding:30px 16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}nav{justify-content:flex-start}.card{padding:18px}}
+</style>
+</head>
+<body>
+<header><h1>أدواتي المجانية ✨</h1><p>أدوات بسيطة، سريعة ومجانية — للحساب والتحويل وكتابة النصوص.</p></header>
+<nav>
+<button onclick="show('home')">الرئيسية</button><button onclick="show('text')">مولد النصوص</button>
+<button onclick="show('percent')">النسبة</button><button onclick="show('discount')">الخصم</button>
+<button onclick="show('units')">الوحدات</button><button onclick="show('age')">العمر</button>
+<button onclick="show('date')">فرق التاريخ</button><button onclick="show('volunteer')">🇪🇺 تطوع أوروبا</button><button onclick="show('resources')">موارد مجانية</button>
+</nav>
+<main>
+<section id="home"><div class="card"><h2>مرحبًا بك 👋</h2><p>استخدم أدوات الموقع مباشرة من هاتفك أو حاسوبك، بدون تسجيل.</p><div class="notice">الأدوات الحسابية تعمل مباشرة داخل المتصفح.</div></div>
+<div class="grid"><div class="tool"><h3>🧮 حاسبة النسبة</h3><p>احسب نسبة من رقم أو النسبة بين رقمين.</p><button class="btn" onclick="show('percent')">ابدأ</button></div>
+<div class="tool"><h3>✍️ مولد النصوص</h3><p>أنشئ مسودة أولية من موضوعك.</p><button class="btn" onclick="show('text')">ابدأ</button></div></div></section>
+
+<section id="text" class="card hidden"><h2>✍️ مولد النصوص</h2><p>أنشئ مسودة قصيرة ثم راجعها وعدّلها قبل النشر.</p>
+<label>الموضوع</label><input id="topic" placeholder="مثال: أهمية القراءة"><label>نوع النص</label>
+<select id="style"><option value="article">مقال قصير</option><option value="post">منشور</option><option value="intro">مقدمة</option></select>
+<button class="btn" onclick="gen()">إنشاء النص</button><textarea id="textResult" class="hidden"></textarea></section>
+
+<section id="percent" class="card hidden"><h2>🧮 حاسبة النسبة المئوية</h2><div class="grid">
+<div class="tool"><h3>نسبة من رقم</h3><input id="p1" type="number" placeholder="النسبة %"><input id="p2" type="number" placeholder="الرقم"><button class="btn" onclick="cp()">احسب</button><div id="pr" class="result"></div></div>
+<div class="tool"><h3>النسبة بين رقمين</h3><input id="p3" type="number" placeholder="الجزء"><input id="p4" type="number" placeholder="الكل"><button class="btn" onclick="cr()">احسب</button><div id="rr" class="result"></div></div>
+</div></section>
+
+<section id="discount" class="card hidden"><h2>🏷️ حاسبة الخصم</h2><label>السعر الأصلي</label><input id="price" type="number" placeholder="100"><label>نسبة الخصم %</label><input id="disc" type="number" placeholder="20"><button class="btn" onclick="cd()">احسب</button><div id="dr" class="result"></div></section>
+
+<section id="units" class="card hidden"><h2>📏 تحويل الوحدات</h2><label>النوع</label><select id="ut" onchange="cu()"><option value="km">كيلومتر ↔ ميل</option><option value="m">متر ↔ قدم</option><option value="kg">كيلوغرام ↔ رطل</option><option value="cm">سنتيمتر ↔ بوصة</option></select><label>القيمة</label><input id="uv" type="number" oninput="cu()" placeholder="أدخل رقمًا"><div id="ur" class="result"></div></section>
+
+<section id="age" class="card hidden"><h2>🎂 حاسبة العمر</h2><input id="birth" type="date"><button class="btn" onclick="age()">احسب العمر</button><div id="ar" class="result"></div></section>
+
+<section id="date" class="card hidden"><h2>📅 فرق التاريخ</h2><div class="grid"><div><label>التاريخ الأول</label><input id="d1" type="date"></div><div><label>التاريخ الثاني</label><input id="d2" type="date"></div></div><button class="btn" onclick="dd()">احسب الفرق</button><div id="dres" class="result"></div></section>
+
+<section id="volunteer" class="card hidden"><h2>🇪🇺 فرص التطوع في أوروبا</h2><p>فرص من بوابة الشباب الأوروبية التابعة للاتحاد الأوروبي. تحقق دائمًا من الموعد والشروط في الصفحة الرسمية قبل التقديم.</p><div class="grid">
+<div class="tool"><h3>🇪🇸 Disappearing Walls — إسبانيا</h3><p><b>المجال:</b> الإدماج الاجتماعي ودعم اللاجئين والمهاجرين.</p><p><b>المدة:</b> 01/10/2026 إلى 30/06/2027 (39 أسبوعًا).</p><p><b>العمر:</b> 18–30 سنة.</p><p><b>الدعم:</b> سكن، بدل طعام ومصروف، دعم النقل والتأمين، وتعويض السفر وفق قواعد البرنامج.</p><p><b>آخر موعد:</b> 15/10/2026.</p><a class="btn" style="display:inline-block;text-decoration:none" href="https://youth.europa.eu/solidarity/opportunity/53994_en" target="_blank" rel="noopener">التفاصيل والتقديم الرسمي</a></div>
+<div class="tool"><h3>🇪🇸 Kiribil — بلباو</h3><p><b>المجال:</b> العمل مع الأطفال والشباب والتعليم غير الرسمي والمجتمع.</p><p><b>المدة:</b> 12/10/2026 إلى 01/08/2027 (42 أسبوعًا).</p><p><b>العمر:</b> 18–30 سنة.</p><p><b>الدعم:</b> سكن مشترك، دعم للطعام والنقل، ومزايا البرنامج الأوروبي.</p><p><b>آخر موعد:</b> 13/09/2026.</p><a class="btn" style="display:inline-block;text-decoration:none" href="https://youth.europa.eu/solidarity/opportunity/53282_en" target="_blank" rel="noopener">التفاصيل والتقديم الرسمي</a></div>
+<div class="tool"><h3>🇪🇸 PLACEAT — إسبانيا</h3><p><b>المجال:</b> الإدماج والعمل مع أشخاص ذوي إعاقة، الرياضة والفنون والبستنة.</p><p><b>المدة:</b> 13/07/2026 إلى 09/05/2027 (40 أسبوعًا).</p><p><b>العمر:</b> 18–30 سنة.</p><p><b>الدعم:</b> سكن مشترك، طعام، مصروف يومي، ونقل مرتبط بالمشروع.</p><p><b>آخر موعد:</b> لا يوجد موعد نهائي مذكور في الصفحة وقت التحقق.</p><a class="btn" style="display:inline-block;text-decoration:none" href="https://youth.europa.eu/solidarity/opportunity/43769_en" target="_blank" rel="noopener">التفاصيل والتقديم الرسمي</a></div>
+<div class="tool"><h3>🇪🇸 Youth Lab: La Sagra</h3><p><b>المجال:</b> مراكز الشباب والورش والأنشطة الثقافية والمجتمعية.</p><p><b>المدة:</b> 01/10/2026 إلى 31/07/2027 (42 أسبوعًا).</p><p><b>العمر:</b> 18–30 سنة.</p><p><b>ملاحظة:</b> لا تتطلب الإسبانية، مع وجود رغبة في تعلمها. التقديم عبر بوابة European Solidarity Corps.</p><p><b>آخر موعد:</b> 13/09/2026.</p><a class="btn" style="display:inline-block;text-decoration:none" href="https://youth.europa.eu/solidarity/opportunity/53325_en" target="_blank" rel="noopener">التفاصيل والتقديم الرسمي</a></div>
+</div><div class="notice" style="margin-top:16px">⚠️ هذه الفرص تتغير بسرعة. المعلومات المعروضة مأخوذة من صفحات الفرص الرسمية وقت التحديث، لذلك افتح الرابط الرسمي وتحقق من حالة التقديم قبل إرسال أي طلب.</div></section>
+
+<section id="resources" class="card hidden"><h2>🧰 موارد مجانية</h2><div class="grid"><div class="tool"><h3>📝 الكتابة</h3><p>استخدم مولد النصوص لإنشاء مسودة أولية.</p><button class="btn" onclick="show('text')">فتح</button></div><div class="tool"><h3>🧮 الحساب</h3><p>أدوات النسبة والخصم وفرق التاريخ متاحة مجانًا.</p><button class="btn" onclick="show('percent')">فتح</button></div></div></section>
+
+<section class="card"><h2>ℹ️ عن الموقع</h2><p>أدواتي المجانية مشروع عربي بسيط لتوفير أدوات عملية وسهلة.</p><p class="small">تحقق من النتائج المهمة بنفسك قبل الاعتماد عليها.</p></section>
+</main>
+<footer><strong>أدواتي المجانية</strong><p>أدوات عربية مجانية وسهلة الاستخدام.</p><span class="small">© <span id="year"></span></span></footer>
+<script>
+const ids=['home','text','percent','discount','units','age','date','volunteer','resources'];
+function show(x){ids.forEach(i=>document.getElementById(i).classList.toggle('hidden',i!==x));scrollTo(0,0)}
+function v(i){return Number(document.getElementById(i).value)}
+function f(x){return Number.isFinite(x)?x.toLocaleString('ar-EG',{maximumFractionDigits:4}):'—'}
+function cp(){let a=v('p1'),b=v('p2');document.getElementById('pr').textContent=Number.isFinite(a)&&Number.isFinite(b)?`${f(a)}% من ${f(b)} = ${f(a*b/100)}`:'أدخل القيمتين.'}
+function cr(){let a=v('p3'),b=v('p4');document.getElementById('rr').textContent=b!==0?`${f(a)} من ${f(b)} = ${f(a/b*100)}%`:'أدخل قيمًا صحيحة.'}
+function cd(){let p=v('price'),d=v('disc');if(p>=0&&d>=0&&d<=100){let s=p*d/100;document.getElementById('dr').innerHTML=`السعر بعد الخصم: <b>${f(p-s)}</b><br>قيمة الخصم: ${f(s)}`}else document.getElementById('dr').textContent='أدخل قيمًا صحيحة.'}
+function cu(){let x=v('uv');if(!Number.isFinite(x)){document.getElementById('ur').textContent='أدخل قيمة.';return}let t=document.getElementById('ut').value,z=t==='km'?`${f(x)} كم = ${f(x*.621371)} ميل`:t==='m'?`${f(x)} متر = ${f(x*3.28084)} قدم`:t==='kg'?`${f(x)} كغ = ${f(x*2.20462)} رطل`:`${f(x)} سم = ${f(x/2.54)} بوصة`;document.getElementById('ur').textContent=z}
+function age(){let s=document.getElementById('birth').value;if(!s)return;let b=new Date(s+'T00:00:00'),n=new Date(),y=n.getFullYear()-b.getFullYear(),m=n.getMonth()-b.getMonth(),d=n.getDate()-b.getDate();if(d<0){m--;d+=new Date(n.getFullYear(),n.getMonth(),0).getDate()}if(m<0){y--;m+=12}document.getElementById('ar').textContent=`العمر التقريبي: ${y} سنة، ${m} شهر، ${d} يوم.`}
+function dd(){let a=document.getElementById('d1').value,b=document.getElementById('d2').value;if(!a||!b)return;let days=Math.round(Math.abs(new Date(b)-new Date(a))/86400000);document.getElementById('dres').textContent=`الفرق: ${days.toLocaleString('ar-EG')} يوم.`}
+function gen(){let t=document.getElementById('topic').value.trim(),s=document.getElementById('style').value;if(!t){alert('اكتب موضوعًا أولًا.');return}let q=s==='post'?`هل فكرت يومًا في ${t}؟`:`${t} موضوع يستحق الاهتمام.`;let x=s==='intro'?`مقدمة عن ${t}:\n\nيُعد ${t} من الموضوعات التي تستحق التعرف إليها. في هذا النص نستعرض الفكرة بصورة مبسطة ونركز على أهم النقاط التي تساعد على فهمها.`:`${q}\n\nفي هذا الموضوع يمكن التعرف على أهم الأفكار المرتبطة به وفهم فائدته في الحياة اليومية. عندما نرتب المعلومات بوضوح ونستخدم أمثلة مناسبة، يصبح المحتوى أسهل للقارئ.\n\nهذه المسودة نقطة بداية ويمكنك تعديلها وإضافة معلوماتك الخاصة قبل النشر.`;let r=document.getElementById('textResult');r.value=x;r.classList.remove('hidden')}
+document.getElementById('year').textContent=new Date().getFullYear();show('home');
+</script>
+</body></html>
